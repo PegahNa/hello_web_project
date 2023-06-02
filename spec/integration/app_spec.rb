@@ -10,32 +10,20 @@ describe Application do
         # class so our tests work.
         let(:app) { Application.new }
 
-    context 'GET /hello' do
-        it 'shoud return "Hello Julia"' do
-            # Send a GET request to /
-            # and returns a response object we can test.
-            response = get('/hello?name=Julia')
 
-            # Assert the response status code and body.
-            expect(response.status).to eq(200)
-            expect(response.body).to eq('Hello Julia')
-        end
-    end
-            
+context 'GET /tasks/new' do
+    it 'should return html form to create a new task' do
+        # Send a GET request to /
+        # and returns a response object we can test.
+        response = get('/tasks/new')
 
-        it 'should return "Hello Mary"' do
-            response = get('/hello?name=Mary')
-
-            expect(response.status).to eq(200)
-            expect(response.body).to eq('Hello Mary')
-        end
-
-    it 'should return "Hello Karim"' do
-        response = get('/hello?name=Karim')
-
+        # Assert the response status code and body.
         expect(response.status).to eq(200)
-        expect(response.body).to eq('Hello Karim')
+        expect(response.body).to include('<form method="POST" action="/tasks">')
+        expect(response.body).to include('<input type="text" name="task_name" />')
     end
 end
+end
+
 
 

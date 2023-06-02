@@ -1,12 +1,28 @@
 require 'sinatra/base'
+require 'sinatra/reloader'
 
-class Application < Sinatra::Base
-  get '/hello' do
-    name = params[:name]
-    return "Hello #{name}"
+    class Application < Sinatra::Base
+      configure :development do
+        register Sinatra::Reloader 
+      end
+
+      get '/tasks/new' do
+        return erb(:new_task)
+      end
   end
-end
 
+
+
+# POST /sort-names
+
+# # Request:
+# POST http://localhost:9292/sort-names
+
+# # With body parameters:
+# names=Joe,Alice,Zoe,Julia,Kieran
+
+# # Expected response (sorted list of names):
+# Alice,Joe,Julia,Kieran,Zoe
     # Request:
 # POST /submit
 
